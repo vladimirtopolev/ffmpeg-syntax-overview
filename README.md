@@ -1,4 +1,4 @@
-0. Extract metadata of video
+# 0. Extract metadata of video
 ```
 ffprobe \
     -v quiet \
@@ -13,10 +13,9 @@ or
 ffmpeg -i ./media/cmd00/input.mp4 
 ```
 
-ffprobe -v quiet -print_format json -show_format -show_streams "lolwut.mp4" > "lolwut.mp4.json"
 
-1. Simple filter
-1.1 Crop video with dimension 640x360 into video with dimension 202x360 (cropped part should be centered relatively the main video):
+# 1. Simple filter
+## 1.1 Crop video with dimension 640x360 into video with dimension 202x360 (cropped part should be centered relatively the main video):
 ```
 ffmpeg \
     -i ./media/cmd01/input.mp4 \
@@ -31,13 +30,15 @@ ffmpeg \
     -vf "crop=202:360:219:0" \
      ./cmd01_out_01.mp4
 ```
-1.2 Crop a landscape video into a portrait video with aspect ration 9x16 (cropped part should be centered relatively the main video):
+## 1.2 Crop a landscape video into a portrait video with aspect ration 9x16 (cropped part should be centered relatively the main video):
+```
 ffmpeg \
     -i ./media/cmd01/input.mp4 \
     -vf "crop=x=(in_w-ow)/2:y=0:w=in_h*9/16:h=in_h" \
     ./cmd01_out_02.mp4
 ```
-2. Filter chain
+
+# 2. Filter chain
 At first we need to crop landscape video into partrait with aspect ratio 9x16 and after horizontally flip it
 ```
 ffmpeg \
@@ -45,7 +46,8 @@ ffmpeg \
     -vf "crop=x=(in_w-ow)/2:y=0:w=in_h*9/16:h=in_hhflip" \
     ./cmd02_out.mp4
 ```
-3. Filter Graphs
+
+# 3. Filter Graphs
 ```
 ffmpeg \
     -i ./media/cmd03/laptop_stream.mov \
